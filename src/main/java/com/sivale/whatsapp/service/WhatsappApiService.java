@@ -4,15 +4,16 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
+import com.sivale.whatsapp.model.Language;
 import com.sivale.whatsapp.model.MessageBody;
-import com.sivale.whatsapp.model.MessageText;
+import com.sivale.whatsapp.model.MessageTemplate;
 import com.sivale.whatsapp.model.RequestMessage;
 
 @Service
 public class WhatsappApiService {
-	private static final String BASE_URL = "https://graph.facebook.com/v19.0/367667796422091/messages";
+	private static final String BASE_URL = "https://graph.facebook.com/v19.0/345371665325786/messages";
 	private static final String BEARER = "Bearer ";
-	private static final String TOKEN = BEARER.concat("EAAHGFuPwA3QBO1bQk27JK43tGlgFbCpRWaU3ZCq2DWZAbZCbyh8R8xxT4ZAZBPFqAdK5eZAKgz5iurr8CNyI5kZBhrBR12wxgBnl5SWx9gW6GJgvuCeeNRYPBpnVzbXJ0Cm3MJVm1PAEgvVs50bZBSj3QefbTjSn26DTdiZBNiKohcr69RdUAwHfEQNW2387FR4VX");
+	private static final String TOKEN = BEARER.concat("EAAHGFuPwA3QBO38l2w6PScUCx6c1kFXEr3IxzHVObiRAxcGoqYcjkQA8P337FA0J2hUUGZC7ZBpbrgqFVc3umInDzE7ULSYjzN9yxXCWtgekBSgLj4XIlbOaWAHjyRf59zsTvqtnAoOnhIgSddYd67mkZAXHlnOfeJCq0pzxIYaOOV5erl7nCUMARLEuBnCVKE4HfKmaNk70rxUXswZD");
 	private static final String LADA = "52";
 
 	private RestClient restClient;
@@ -26,8 +27,8 @@ public class WhatsappApiService {
 		request = new RequestMessage();
 		request.setMessaging_product("whatsapp");
 		request.setTo(LADA.concat(messageBody.getNumberPhone()));
-		request.setType("text");
-		request.setText(new MessageText(messageBody.getMessage()));
+		request.setType("template");
+		request.setTemplate(new MessageTemplate(messageBody.getNameTemplate(), new Language("es_MX")));
 
 		return restClient.post().contentType(MediaType.APPLICATION_JSON).body(request).retrieve().body(String.class);
 	}

@@ -11,5 +11,5 @@ public class RequestMessage {
 	private String messaging_product;
 	private String to;
 	private String type;
-	private MessageText text;
+	private MessageTemplate template;
 }

@@ -9,5 +9,5 @@ import lombok.ToString;
 @ToString
 public class MessageBody {
 	private String numberPhone;
-	private String message;
+	private String nameTemplate;
 }
